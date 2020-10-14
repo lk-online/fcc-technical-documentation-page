@@ -108,3 +108,7 @@ code {
     background-color: white;
     cursor: pointer;
 }
+
+#disclaimer {
+    margin-top: 50px;
+}
