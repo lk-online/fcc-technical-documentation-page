@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fcc technical documentation page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="nav-container">
+        <nav id="navbar">
+            <header>Hypertext Transfer Protocol (HTTP)</header>
+            <ul>
+                <li>
+                    <a href="#overview" class="nav-link">Overview</a>
+                </li>
+                <li>
+                    <a href="#http_cache" class="nav-link">HTTP Cache</a>
+                </li>
+                <li>
+                    <a href="#http_cookies" class="nav-link">HTTP Cookies</a>
+                </li>
+                <li>
+                    <a href="#http_headers" class="nav-link">HTTP Headers</a>
+                </li>
+                <li>
+                    <a href="#http_request_methods" class="nav-link">HTTP Request Methods</a>
+                </li>
+                <li>
+                    <a href="#http_status_response_codes" class="nav-link">HTTP Status Response Codes</a>
+                </li>
+                <li>
+                    <a href="#csp_directives" class="nav-link">CSP directives</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <main id="main-doc">
+        <section id="overview" class='main-section'>
+            <header>
+                <h2>Overview</h2>
+            </header>
+            <p>HTTP is a protocol which allows the fetching of resources, such as HTML documents. It is the foundation
+                of any data exchange on the Web and it is a client-server protocol, which means requests are initiated
+                by the recipient, usually the Web browser. A complete document is reconstructed from the different
+                sub-documents fetched, for instance text, layout description, images, videos, scripts, and more.</p>
+            <p>HTTP messages (before HTTP/2) are human-readable. With HTTP/2, these simple messages are encapsulated in
+                frames, making them impossible to read directly, but the principle remains the same. For example:
+                <code>GET / HTTP/1.1
+                    Host: developer.mozilla.org
+                    Accept-Language: fr</code>
+            </p>
+            <p>If HTTP pipelining is activated, several requests can be sent without waiting for the first response to
+                be fully received. HTTP pipelining has proven difficult to implement in existing networks, where old
+                pieces of software coexist with modern versions. HTTP pipelining has been superseded in HTTP/2 with more
+                robust multiplexing requests within a frame.</p>
+        </section>
+        <section id="http_cache" class='main-section'>
+            <header>
+                <h2>HTTP Cache</h2>
+            </header>
+            <p>Caching is a technique that stores a copy of a given resource and serves it back when requested. When a
+                web cache has a requested resource in its store, it intercepts the request and returns its copy instead
+                of re-downloading from the originating server. This achieves several goals: it eases the load of the
+                server that doesn’t need to serve all clients itself, and it improves performance by being closer to the
+                client, i.e., it takes less time to transmit the resource back. For a web site, it is a major component
+                in achieving high performance. On the other side, it has to be configured properly as not all resources
+                stay identical forever: it is important to cache a resource only until it changes, not longer.</p>
+            <p>There are several kinds of caches: these can be grouped into two main categories: private or shared
+                caches. A shared cache is a cache that stores responses for reuse by more than one user. A private cache
+                is dedicated to a single user. This page will mostly talk about browser and proxy caches, but there are
+                also gateway caches, CDN, reverse proxy caches and load balancers that are deployed on web servers for
+                better reliability, performance and scaling of web sites and web applications.
+            </p>
+            <p>HTTP caching is optional, but reusing a cached resource is usually desirable. However, common HTTP caches
+                are typically limited to caching responses to GET and may decline other methods. The primary cache key
+                consists of the request method and target URI (oftentimes only the URI is used as only GET requests are
+                caching targets). Common forms of caching entries are:
+            <ul>
+                <li>Successful results of a retrieval request: a <code>200</code> (OK) response to a GET request
+                    containing a resource like HTML documents, images or files.</li>
+                <li>Permanent redirects: a <code>301</code> (Moved Permanently) response.</li>
+                <li>Error responses: a <code>404</code> (Not Found) result page.</li>
+                <li>Incomplete results: a <code>206</code> (Partial Content) response.</li>
+                <li>Responses other than <code>GET</code> if something suitable for use as a cache key is defined.</li>
+            </ul>
+            </p>
+        </section>
+        <section id="http_cookies" class='main-section'>
+            <header>
+                <h2>HTTP Cookies</h2>
+            </header>
+            <p>An HTTP cookie (web cookie, browser cookie) is a small piece of data that a server sends to the user's
+                web browser. The browser may store it and send it back with later requests to the same server.
+                Typically, it's used to tell if two requests came from the same browser — keeping a user logged-in, for
+                example. It remembers stateful information for the stateless HTTP protocol.</p>
+            <p>Cookies are mainly used for three purposes:
+            <ul>
+                <li>Session management
+                    Logins, shopping carts, game scores, or anything else the server should remember</li>
+                <li>Personalization
+                    User preferences, themes, and other settings</li>
+                <li>Tracking
+                    Recording and analyzing user behavior</li>
+            </ul>
+            </p>
+        </section>
+        <section id="http_headers" class='main-section'>
+            <header>
+                <h2>HTTP Headers</h2>
+            </header>
+            <p>HTTP headers let the client and the server pass additional information with an HTTP request or response.
+                An HTTP header consists of its case-insensitive name followed by a colon (:), then by its value.
+                Whitespace before the value is ignored.</p>
+            <p>Custom proprietary headers have historically been used with an X- prefix, but this convention was
+                deprecated in June 2012 because of the inconveniences it caused when nonstandard fields became standard
+                in RFC 6648; others are listed in an IANA registry, whose original content was defined in RFC 4229. IANA
+                also maintains a registry of proposed new HTTP headers.</p>
+            <p>Headers can also be grouped according to how proxies handle them:
+            <ul>
+                <li><code>Connection</code></li>
+                <li><code>Keep-Alive</code></li>
+                <li><code>Proxy-Authenticate</code></li>
+                <li><code>Proxy-Authorization</code></li>
+                <li><code>TE</code></li>
+                <li><code>Trailer</code></li>
+                <li><code>Transfer-Encoding</code></li>
+                <li><code>Upgrade</code></li>
+            </ul>
+            </p>
+        </section>
+        <section id="http_request_methods" class='main-section'>
+            <header>
+                <h2>HTTP Request Methods</h2>
+            </header>
+            <p>HTTP defines a set of request methods to indicate the desired action to be performed for a given
+                resource. Although they can also be nouns, these request methods are sometimes referred to as HTTP
+                verbs. Each of them implements a different semantic, but some common features are shared by a group of
+                them: e.g. a request method can be safe, idempotent, or cacheable.</p>
+            <ul>
+                <li>The <code>GET</code> method requests a representation of the specified resource. Requests using GET
+                    should only retrieve data.</li>
+                <li>The <code>HEAD</code> method asks for a response identical to that of a GET request, but without the
+                    response body.</li>
+                <li>The <code>POST</code> method is used to submit an entity to the specified resource, often causing a
+                    change in state or side effects on the server.</li>
+                <li>The <code>PUT</code> method replaces all current representations of the target resource with the
+                    request payload.</li>
+                <li>The <code>DELETE</code> method deletes the specified resource.</li>
+                <li>The <code>CONNECT</code> method establishes a tunnel to the server identified by the target
+                    resource.</li>
+                <li>The <code>OPTIONS</code> method is used to describe the communication options for the target
+                    resource.</li>
+                <li>The <code>TRACE</code> method performs a message loop-back test along the path to the target
+                    resource.</li>
+                <li>The <code>PATCH</code> method is used to apply partial modifications to a resource.</li>
+            </ul>
+        </section>
+        <section id="http_status_response_codes" class='main-section'>
+            <header>
+                <h2>HTTP Status Response Codes</h2>
+            </header>
+            <p>HTTP response status codes indicate whether a specific HTTP request has been successfully completed.
+                Responses are grouped in five classes:
+            <ol>
+                <li>Informational responses (100–199)</li>
+                <li>Successful responses (200–299)</li>
+                <li>Redirects (300–399)</li>
+                <li>Client errors (400–499)</li>
+                <li>and Server errors (500–599)</li>
+            </ol>
+            </p>
+        </section>
+        <section id="csp_directives" class='main-section'>
+            <header>
+                <h2>CSP directives</h2>
+            </header>
+            <p>The HTTP <code>Content-Security-Policy</code> response header allows web site administrators to control
+                resources the
+                user agent is allowed to load for a given page. With a few exceptions, policies mostly involve
+                specifying server origins and script endpoints. This helps guard against cross-site scripting attacks
+                (XSS).</p>
+        </section>
+    </main>
+</body>
+
+</html>
